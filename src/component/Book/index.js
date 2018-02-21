@@ -3,10 +3,18 @@ import React from 'react'
 
 export default class Book extends React.Component{
 
-  constructor(props){
-    super(props)
 
-
+  handleBookState(e) {
+    let value = e.target.value
+    this.setState({
+      bookList: this.props.book.map(item =>
+            item.title === this.props.title ? {
+              ...item,
+              shelf: value
+            }: item
+        )
+      }
+    )
   }
 
   render(){

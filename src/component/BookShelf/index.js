@@ -1,32 +1,28 @@
 import React from 'react'
 import Book from '../Book'
 
-export default class BookShelf extends React.Component{
+export default function BookShelf(props) {
 
-  render(){
-    return(
-      <div className="bookshelf">
-        <h2 className="bookshelf-title">{this.props.title}</h2>
-        <div className="bookshelf-books">
-          <ol className="books-grid">
-            {
-              this.props.book.map((item, index) =>
-                <li key={index}>
-                  <Book
-                    book={this.props.book}
-                    shelf={item.shelf}
-                    authors={item.authors}
-                    imageLinks={item.imageLinks.thumbnail}
-                    title={item.title}
-                    handleBookState={this.props.handleBookState}
-                  />
-                </li>
-              )
+  let {title, handleBookState, book} = props
 
-            }
-          </ol>
-        </div>
+    return (<div className="bookshelf">
+      <h2 className="bookshelf-title">{title}</h2>
+      <div className="bookshelf-books">
+        <ol className="books-grid">
+          {
+            book.map((item, index) => <li key={index}>
+              <Book
+                key={index}
+                book={book}
+                title={item.title}
+                authors={item.authors}
+                imageLinks={item.imageLinks.thumbnail}
+                handleBookState={handleBookState}
+                shelf={item.shelf}/>
+            </li>)
+          }
+        </ol>
       </div>
-    )
-  }
+    </div>)
+
 }

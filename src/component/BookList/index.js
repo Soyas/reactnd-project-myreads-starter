@@ -12,7 +12,7 @@ export default class BookList extends React.Component {
     this.handleBookState = this.handleBookState.bind(this)
   }
 
-  componentDidMount() {
+  componentWillMount() {
     BooksAPI.getAll().then(data => this.setState({bookList: data}))
   }
 
@@ -43,7 +43,7 @@ export default class BookList extends React.Component {
         </div>
       </div>
       <div className="open-search">
-        <a onClick={this.props.showSearchPage}>Add a book</a>
+        <a onClick={this.props.isShowSearchPage}>Add a book</a>
       </div>
     </div>)
   }

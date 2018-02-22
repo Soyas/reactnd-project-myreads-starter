@@ -1,44 +1,51 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
+import Book from '../Book'
 
+export default function SearchBooks(props) {
 
-export default class SearchBooks extends React.Component {
+  let {result, updateQuery, handleBookState, query} = props
 
-
-  state = {
-    query: ''
+  let showingResult
+  if (query) {
+    const match = new RegExp(escapeRegExp(query), 'i')
+    showingResult = result.filter(book => match.test(book.title))
+  } else {
+    showingResult = result
   }
 
-  updateQuery(query){
-    this.setState({ query: query.trim() })
-  }
+  showingResult.sort(sortBy('title'))
 
-  render() {
-
-    let showingResult 
-
-
-    return (
-      <div className="search-books">
-        <div className="search-books-bar">
-          <a className="close-search" onClick={() => this.props.isShowSearchPage()}>Close</a>
-          <div className="search-books-input-wrapper">
-            <input
-              type="text"
-              placeholder="Search by title or author"
-              value={this.state.query}
-              onChange={(e) => this.updateQuery(e.target.value)}
+  return (<div className="search-books">
+    <div className="search-books-bar">
+      <Link to="/" className="close-search" }
+      >Close</Link>
+      <div className="search-books-input-wrapper">
+        <input
+          type="text"
+          placeholder="Search by title or author"
+          value={query}
+          onChange={(e) => updateQuery(e.target.value)}
+        />
+      </div>
+    </div>
+    <div className="search-books-results">
+      <ol className="books-grid">
+        {
+          showingResult.map((item, index) => <li key={index}>
+            <Book
+              books={result}
+              title={item.title}
+              authors={item.authors}
+              imageLinks={item.imageLinks.thumbnail}
+              handleBookState={handleBookState}
+              shelf={item.shelf}
             />
-          </div>
-        </div>
-        <div className="search-books-results">
-          <ol className="books-grid">
-            {
-
-            }
-          </ol>
-        </div>
-      </div>);
-  }
+          </li>)
+        }
+      </ol>
+    </div>
+  </div>);
 }

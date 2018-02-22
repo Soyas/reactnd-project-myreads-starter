@@ -5,7 +5,7 @@ export default function Book(props) {
     width: 128,
     height: 192
   }
-  let {book, title, authors, imageLinks, handleBookState, shelf} = props
+  let {books, title, authors, imageLinks, handleBookState, shelf} = props
 
   return (<div className="book">
     <div className="book-top">
@@ -13,7 +13,7 @@ export default function Book(props) {
       <div className="book-shelf-changer">
         <select onChange={(e) => {
             let value = e.target.value
-            handleBookState(value, title, book)
+            handleBookState(value, title, books)
           }} defaultValue={shelf}>
           <option value="none" disabled="disabled">Move to...</option>
           <option value="currentlyReading">Currently Reading</option>

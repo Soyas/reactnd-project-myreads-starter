@@ -5,7 +5,7 @@ export default function Book(props) {
     width: 128,
     height: 192
   }
-  let {books, title, authors, imageLinks, handleBookState, shelf} = props
+  let {books, shelf, title, authors, imageLinks, handleBookState} = props
 
   return (<div className="book">
     <div className="book-top">

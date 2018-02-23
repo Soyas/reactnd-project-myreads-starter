@@ -6,7 +6,7 @@ import Book from '../Book'
 
 export default function SearchBooks(props) {
 
-  let {result, updateQuery, handleBookState, query} = props
+  let {result, query, updateQuery, searchBook, handleBookState} = props
 
   let showingResult
   if (query) {
@@ -20,28 +20,28 @@ export default function SearchBooks(props) {
 
   return (<div className="search-books">
     <div className="search-books-bar">
-      <Link to="/" className="close-search" }
-      >Close</Link>
+      <Link to="/" className="close-search" >Close</Link>
       <div className="search-books-input-wrapper">
         <input
           type="text"
           placeholder="Search by title or author"
           value={query}
-          onChange={(e) => updateQuery(e.target.value)}
+          onChange={(e) => searchBook(e.target.value)}
         />
       </div>
     </div>
     <div className="search-books-results">
       <ol className="books-grid">
         {
-          showingResult.map((item, index) => <li key={index}>
+          showingResult.map((item, index) =>
+          <li key={index}>
             <Book
               books={result}
+              shelf={item.shelf}
               title={item.title}
               authors={item.authors}
               imageLinks={item.imageLinks.thumbnail}
               handleBookState={handleBookState}
-              shelf={item.shelf}
             />
           </li>)
         }

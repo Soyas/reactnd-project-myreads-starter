@@ -13,11 +13,12 @@ export default function BookShelf(props) {
             books.map((item, index) => <li key={index}>
               <Book
                 books={books}
+                shelf={item.shelf}
                 title={item.title}
                 authors={item.authors}
                 imageLinks={item.imageLinks.thumbnail}
                 handleBookState={handleBookState}
-                shelf={item.shelf}/>
+              />
             </li>)
           }
         </ol>
